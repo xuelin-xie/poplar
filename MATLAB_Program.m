@@ -1,13 +1,13 @@
 clear;
 clc;
-x1=xlsread('C:\Users\X_X-lin\Desktop\ĞŞ¸Ä\AVG.xlsx','B2:B21');
-x2=xlsread('C:\Users\X_X-lin\Desktop\ĞŞ¸Ä\AVG.xlsx','C2:C21');
-x3=xlsread('C:\Users\X_X-lin\Desktop\ĞŞ¸Ä\AVG.xlsx','D2:D21');
-x4=xlsread('C:\Users\X_X-lin\Desktop\ĞŞ¸Ä\AVG.xlsx','E2:E21');
-x5=xlsread('C:\Users\X_X-lin\Desktop\ĞŞ¸Ä\AVG.xlsx','F2:F21');
-Y=xlsread('C:\Users\X_X-lin\Desktop\ĞŞ¸Ä\AVG.xlsx','G2:G21');
+x1=xlsread('AVG.xlsx','B2:B21');
+x2=xlsread('AVG.xlsx','C2:C21');
+x3=xlsread('AVG.xlsx','D2:D21');
+x4=xlsread('AVG.xlsx','E2:E21');
+x5=xlsread('AVG.xlsx','F2:F21');
+Y=xlsread('AVG.xlsx','G2:G21');
  
-%»ùÓÚ²ã´Î¾ÛÀàSVR
+%åŸºäºå±‚æ¬¡èšç±»SVR
 HX=[x1(1:16),x2(1:16),x4(1:16)];
 testHX=[x1(17:20),x2(17:20),x4(17:20)];
 model1=svmtrain(Y(1:16),HX,'-s 3 -t 2 -c 15 -g 0.0015 -p 0.001 ');
@@ -16,7 +16,7 @@ model1=svmtrain(Y(1:16),HX,'-s 3 -t 2 -c 15 -g 0.0015 -p 0.001 ');
 Hmse1=sum((Y(1:16)-py1).*(Y(1:16)-py1)) /16;
 Hmse2=sum((Y(17:20)-ptesty1).*(Y(17:20)-ptesty1)) /4;
  
-%»ùÓÚLASSOÌØÕ÷Ñ¡ÔñµÄSVR
+%åŸºäºLASSOç‰¹å¾é€‰æ‹©çš„SVR
 LX=[x1(1:16),x2(1:16),x3(1:16)];
 testLX=[x1(17:20),x2(17:20),x3(17:20)];
 model2=svmtrain(Y(1:16),LX,'-s 3 -t 2 -c 26  -g 0.0015 -p 0.01 ');
@@ -25,7 +25,7 @@ model2=svmtrain(Y(1:16),LX,'-s 3 -t 2 -c 26  -g 0.0015 -p 0.01 ');
 Lmse1=sum((Y(1:16)-py2).*(Y(1:16)-py2)) /16;
 Lmse2=sum((Y(17:20)-ptesty2).*(Y(17:20)-ptesty2)) /4;
  
-%»ùÓÚstepwiseÌØÕ÷Ñ¡ÔñµÄSVR
+%åŸºäºstepwiseç‰¹å¾é€‰æ‹©çš„SVR
 SX=[x2(1:16),x3(1:16)];
 testSX=[x2(17:20),x3(17:20)];
 model3=svmtrain(Y(1:16),SX,'-s 3 -t 2 -c 2  -g 0.005 -p 0.001 ');
@@ -34,7 +34,7 @@ model3=svmtrain(Y(1:16),SX,'-s 3 -t 2 -c 2  -g 0.005 -p 0.001 ');
 Smse1=sum((Y(1:16)-py3).*(Y(1:16)-py3)) /16;
 Smse2=sum((Y(17:20)-ptesty3).*(Y(17:20)-ptesty3)) /4;
  
-%»ùÓÚAll-subsetsÌØÕ÷Ñ¡ÔñµÄSVR
+%åŸºäºAll-subsetsç‰¹å¾é€‰æ‹©çš„SVR
 RX=[x1(1:16),x2(1:16),x3(1:16),x4(1:16),x5(1:16)];
 testRX=[x1(17:20),x2(17:20),x3(17:20),x4(17:20),x5(17:20)];
 model4=svmtrain(Y(1:16),RX,'-s 3 -t 2 -c 12  -g 0.001 -p 0.001 ');
@@ -43,7 +43,7 @@ model4=svmtrain(Y(1:16),RX,'-s 3 -t 2 -c 12  -g 0.001 -p 0.001 ');
 Rmse1=sum((Y(1:16)-py4).*(Y(1:16)-py4)) /16;
 Rmse2=sum((Y(17:20)-ptesty4).*(Y(17:20)-ptesty4)) /4;
   
-%ÔÚÑµÁ·¼¯ÉÏÔ¤²âÖµ
+%åœ¨è®­ç»ƒé›†ä¸Šé¢„æµ‹å€¼
 figure(1)
 subplot(2,2,1)
 plot(Y(1:16),'r*-','linewidth',2.5,'MarkerSize',9)
@@ -85,7 +85,7 @@ title('All-subsets SVR','FontSize',13)
 xlabel('Poplar samples')
 ylabel('Values')
  
-%ÔÚ²âÊÔ¼¯ÉÏÔ¤²âÖµ
+%åœ¨æµ‹è¯•é›†ä¸Šé¢„æµ‹å€¼
 figure(2)
 subplot(2,2,1)
 plot(Y(17:20),'r*-','linewidth',2.5,'MarkerSize',9)
@@ -128,7 +128,7 @@ xlabel('Poplar samples')
 ylabel('Values')
  
  
-%%ÑµÁ·¼¯Ô¤²â¶Ô±ÈÍ¼
+%%è®­ç»ƒé›†é¢„æµ‹å¯¹æ¯”å›¾
 figure(3)
 subplot(1,2,1)
 plot(Y(1:16),'r*-','linewidth',2.5,'MarkerSize',9)
@@ -145,7 +145,7 @@ title('Three MLP methods','FontSize',14)
 xlabel('Poplar samples')
 ylabel('Values')
  
-%%²âÊÔ¼¯Ô¤²â¶Ô±ÈÍ¼
+%%æµ‹è¯•é›†é¢„æµ‹å¯¹æ¯”å›¾
 subplot(1,2,2)
 plot(Y(17:20),'r*-','linewidth',2.5,'MarkerSize',9)
 hold on;
